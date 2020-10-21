@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CompetitorDTO {
-    private CompetitorInfoDTO competitors;
+    private CompetitorInfoDTO competitor;
 }

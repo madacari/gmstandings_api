@@ -8,5 +8,4 @@ import lombok.Data;
 public class CompetitorInfoDTO {
     private Long id;
     private String name;
-    private String description;
 }
