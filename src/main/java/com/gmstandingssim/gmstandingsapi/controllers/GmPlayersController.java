@@ -44,7 +44,6 @@ public class GmPlayersController {
                 .build();
 
         String gmRequestUri = gmPlayersService.getRequestUri(gmApiRequestDTO);
-        logger.info(gmRequestUri);
 
         WebClient.RequestHeadersSpec<?> gmGetRequest =
                 grandmastersClient
