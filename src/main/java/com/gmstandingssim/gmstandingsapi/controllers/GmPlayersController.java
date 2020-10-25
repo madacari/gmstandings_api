@@ -27,9 +27,9 @@ public class GmPlayersController {
 
     Logger logger = LoggerFactory.getLogger(GmPlayersController.class);
 
-    @GetMapping("/players")
+    @GetMapping("/tournament-data")
     public ResponseEntity retrievePlayers(@RequestBody(required = false) GmApiRequestDTO gmApiRequestDTO) {
-        logger.info("Route /players called");
+        logger.info("Route /tournament-data called");
         logger.info(String.format("%s",gmApiRequestDTO));
 
         WebClient grandmastersClient =
@@ -51,8 +51,6 @@ public class GmPlayersController {
                         .uri(gmRequestUri);
 
         GmApiResponseDTO gmApiResponseDTO = gmGetRequest.retrieve().bodyToMono(GmApiResponseDTO.class).block();
-
-//        logger.info(String.format("%s",gmApiResponseDTO));
 
         return ResponseEntity.ok().body(gmApiResponseDTO);
     }
