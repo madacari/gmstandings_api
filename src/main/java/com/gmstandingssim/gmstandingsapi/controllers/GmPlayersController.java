@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -28,9 +29,10 @@ public class GmPlayersController {
     Logger logger = LoggerFactory.getLogger(GmPlayersController.class);
 
     @GetMapping("/tournament-data")
-    public ResponseEntity retrievePlayers(@RequestBody(required = false) GmApiRequestDTO gmApiRequestDTO) {
+    public ResponseEntity retrievePlayers(@RequestParam(required = false, name="season") String season,
+                                          @RequestParam(required = false, name="year") String year) {
         logger.info("Route /tournament-data called");
-        logger.info(String.format("%s",gmApiRequestDTO));
+        logger.info(String.format("%s %s",season, year));
 
         WebClient grandmastersClient =
                 WebClient.builder()
@@ -43,7 +45,7 @@ public class GmPlayersController {
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
 
-        String gmRequestUri = gmPlayersService.getRequestUri(gmApiRequestDTO);
+        String gmRequestUri = gmPlayersService.getRequestUri(season, year);
 
         WebClient.RequestHeadersSpec<?> gmGetRequest =
                 grandmastersClient

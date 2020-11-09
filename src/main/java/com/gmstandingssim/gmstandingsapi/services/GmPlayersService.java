@@ -5,17 +5,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GmPlayersService {
-    public String getRequestUri(GmApiRequestDTO gmApiRequestDTO) {
+    public String getRequestUri(String season, String year) {
         String uri = "/";
         char parameterPrefix = '?';
-        if (gmApiRequestDTO!= null) {
-            if (gmApiRequestDTO.getSeason() != null) {
-                uri = uri + "?season=" + gmApiRequestDTO.getSeason();
-                parameterPrefix = '&';
-            }
-            if (gmApiRequestDTO.getYear() != null) {
-                uri = uri + parameterPrefix + "year=" + gmApiRequestDTO.getYear();
-            }
+        if (season != null) {
+            uri = uri + "?season=" + season;
+            parameterPrefix = '&';
+        }
+        if (year != null) {
+            uri = uri + parameterPrefix + "year=" + year;
         }
         return uri;
     }
